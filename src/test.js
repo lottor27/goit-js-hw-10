@@ -1,25 +1,14 @@
-// Вместо select.breed-select можешь использовать любую библиотеку с красивыми селектом, например
-import SlimSelect from 'slim-select';
-import Notiflix from 'notiflix';
-
-selectBread = document.querySelector('.breed-select');
-pLoader = document.querySelector('.loader');
-pError = document.querySelector('.error');
-catInfoBox = document.querySelector('.cat-info');
-
-pLoader.setAttribute('disable', 'disable');
-pError.setAttribute('disable', 'disable');
-
 const url = `https://api.thecatapi.com/v1/breeds`;
 const api_key =
   'live_GmEyPinTRF7Q7LURfrAEdeqCEigZuDD4dcT4ZAQbZLhtFQ0FHyICoGRmHHGSy1P0';
 let storedBreeds = [];
-  
+
 fetch(url, {
   headers: {
     'x-api-key': api_key,
   },
-
+  width: 76,
+  height: 140,
 })
   .then(response => {
     return response.json();
@@ -40,12 +29,22 @@ fetch(url, {
       //use the current array index
       option.value = i;
       option.innerHTML = `${breed.name}`;
-      selectBread.appendChild(option);
+      document.getElementById('breed_selector').appendChild(option);
     }
     //show the first breed by default
-    // showBreedImage(0);
+    showBreedImage(0);
   })
   .catch(function (error) {
     console.log(error);
   });
 
+function showBreedImage(index) {
+  document.getElementById('breed_image').src = storedBreeds[index].image.url;
+
+  document.getElementById('breed_json').textContent =
+    storedBreeds[index].temperament;
+
+  document.getElementById('wiki_link').href = storedBreeds[index].wikipedia_url;
+  document.getElementById('wiki_link').innerHTML =
+    storedBreeds[index].wikipedia_url;
+}
