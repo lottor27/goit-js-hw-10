@@ -11,6 +11,8 @@ fetch(url, {
   headers: {
     'x-api-key': api_key,
   },
+  width: 76,
+  height: 140,
 })
   .then(response => {
     return response.json();
