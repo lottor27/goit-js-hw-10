@@ -27,7 +27,7 @@ function fetchBreeds() {
     })
     .then(data => {
       console.log('check data');
-      //filter to only include those with an `image` object
+     
       data = data.filter(img => img.image?.url != null);
 
       storedBreeds = data;
@@ -36,15 +36,15 @@ function fetchBreeds() {
         const breed = storedBreeds[i];
         let option = document.createElement('option');
 
-        //skip any breeds that don't have an image
+   
         if (!breed.image) continue;
 
-        //use the current array index
+      
         option.value = i;
         option.innerHTML = `${breed.name}`;
         selectBreed.appendChild(option);
       }
-      //show the first breed by default
+   
       creatingBox();
       showBreedImage(0);
     })
