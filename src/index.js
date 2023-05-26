@@ -29,11 +29,12 @@ function fetchBreeds() {
       console.log('check data');
      
       data = data.filter(img => img.image?.url != null);
+      // console.log(data);
+      
+      
 
-      storedBreeds = data;
-
-      for (let i = 0; i < storedBreeds.length; i++) {
-        const breed = storedBreeds[i];
+      for (let i = 0; i < data.length; i++) {
+        const breed = data[i];
         let option = document.createElement('option');
 
    
@@ -72,16 +73,16 @@ function creatingBox() {
 
 function showBreedImage(index) {
   
-  document.getElementById('breed_name').textContent = storedBreeds[index].name;
+  document.getElementById('breed_name').textContent = data[index].name;
 
-  document.getElementById('breed_image').src = storedBreeds[index].image.url;
+  document.getElementById('breed_image').src = data[index].image.url;
 
   document.getElementById('breed_json').textContent =
-    storedBreeds[index].temperament;
+    data[index].temperament;
 
 
   document.getElementById('wiki_info').innerHTML =
-    storedBreeds[index].description;
+    data[index].description;
 }
 
 selectBreed.addEventListener('click', fetchCatByBreed);
