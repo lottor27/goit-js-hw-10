@@ -2,7 +2,7 @@
 import SlimSelect from 'slim-select';
 import Notiflix from 'notiflix';
 
-selectBreed = document.querySelector('.breed-select');
+selectBreed = document.querySelector('select.breed-select');
 pLoader = document.querySelector('.loader');
 pError = document.querySelector('.error');
 catInfoBox = document.querySelector('.cat-info');
