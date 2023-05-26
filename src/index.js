@@ -2,7 +2,7 @@
 import SlimSelect from 'slim-select';
 import Notiflix from 'notiflix';
 
-selectBread = document.querySelector('.breed-select');
+selectBreed = document.querySelector('.breed-select');
 pLoader = document.querySelector('.loader');
 pError = document.querySelector('.error');
 catInfoBox = document.querySelector('.cat-info');
@@ -42,7 +42,7 @@ function fetchBreeds() {
         //use the current array index
         option.value = i;
         option.innerHTML = `${breed.name}`;
-        selectBread.appendChild(option);
+        selectBreed.appendChild(option);
       }
       //show the first breed by default
       creatingBox();
@@ -83,7 +83,7 @@ function showBreedImage(index) {
     storedBreeds[index].description;
 }
 
-selectBread.addEventListener('click', fetchCatByBreed);
+selectBreed.addEventListener('click', fetchCatByBreed);
 
 function fetchCatByBreed(event) {
   // console.log(event.currentTarget.value);
