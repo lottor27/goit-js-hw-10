@@ -1,3 +1,23 @@
+body {
+  font-family: "roboto", sans-serif;
+  border-style: solid;
+  border-width: 0px 1px 0px 0px;
+  margin-left: 10px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding-left: 0;
+}
 .hide {
   position: absolute;
   width: 1px;
@@ -11,7 +31,54 @@
   overflow: hidden;
 }
 
+li{
+  list-style-type: none;
+}
 .cat-info{
   display: flex;
   flex-direction: row-reverse;
+}
+.cat_text_info{
+  padding-left: 20px;
+}
+
+.breed-select{
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.temp_list{
+  /* font-family: "Roboto", sans-serif; */
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.16;
+  letter-spacing: 0.03em;
+  padding-top: 20px;
+  /* display: flex; */
+  
+}
+
+#breed_json{
+  /* font-family: "Roboto", sans-serif; */
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.16;
+  letter-spacing: 0.03em;
+  padding-top: 10px;
+}
+
+#wiki-info{
+/* font-weight: 400;
+  font-size: 18px;
+  line-height: 1.16;
+  letter-spacing: 0.03em;
+  margin-top: 20px; */
+}
+
+#breed_name{
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 1.16;
+  letter-spacing: 0.03em;
+  padding-bottom: 20px;
 }

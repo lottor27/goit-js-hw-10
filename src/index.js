@@ -56,11 +56,11 @@ function fetchBreeds() {
 fetchBreeds();
 
 function creatingBox() {
-  const box = `<div>
+  const box = `<div class = "cat_text_info">
   <h2 id="breed_name"></h2>
 <a id="wiki_info" target="_blank"></a>
-<h3>Temperament</h3>
-<p id="breed_json"></P>
+<ul class="temp_list">Temperament
+<li id="breed_json"></li></ul>
 </div>
 
 <div>
