@@ -89,7 +89,7 @@ selectBreed.addEventListener('click', fetchCatByBreed);
 
 function fetchCatByBreed(event) {
   // console.log(event.currentTarget.value);
-   breedId = event.currentTarget.value;
+   const breedId = event.currentTarget.value;
   showBreedImage(breedId);
 }
 // b
