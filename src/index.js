@@ -2,10 +2,10 @@
 import SlimSelect from 'slim-select';
 import Notiflix from 'notiflix';
 
-selectBreed = document.querySelector('.breedselect');
-pLoader = document.querySelector('.loader');
-pError = document.querySelector('.error');
-catInfoBox = document.querySelector('.cat-info');
+const selectBreed = document.querySelector('.breedselect');
+const pLoader = document.querySelector('.loader');
+const pError = document.querySelector('.error');
+const catInfoBox = document.querySelector('.cat-info');
 
 pLoader.classList.add('hide');
 pError.classList.add('hide');
@@ -71,6 +71,7 @@ function creatingBox() {
 }
 
 function showBreedImage(index) {
+  
   document.getElementById('breed_name').textContent = storedBreeds[index].name;
 
   document.getElementById('breed_image').src = storedBreeds[index].image.url;
