@@ -9,6 +9,7 @@ const catInfoBox = document.querySelector('.cat-info');
 
 pLoader.classList.add('hide');
 pError.classList.add('hide');
+let storedBreeds = [];
 
 const urlBreeds = `https://api.thecatapi.com/v1/breeds`;
 const urlSearch = `https://api.thecatapi.com/v1/images/search`;
@@ -26,37 +27,37 @@ function fetchBreeds() {
       return response.json();
     })
     .then(data => {
-      console.log('check data');
-     
+      //filter to only include those with an `image` object
       data = data.filter(img => img.image?.url != null);
-      // console.log(data);
-      
-      
 
-      for (let i = 0; i < data.length; i++) {
-        const breed = data[i];
+      storedBreeds = data;
+
+      for (let i = 0; i < storedBreeds.length; i++) {
+        const breed = storedBreeds[i];
         let option = document.createElement('option');
 
-   
+        //skip any breeds that don't have an image
         if (!breed.image) continue;
 
-      
+        //use the current array index
         option.value = i;
         option.innerHTML = `${breed.name}`;
         selectBreed.appendChild(option);
       }
-   
+
       creatingBox();
       showBreedImage(0);
     })
+
     .catch(function (error) {
       console.log(error);
     });
 }
 
-fetchBreeds();
 
+console.log(fetchBreeds());
 function creatingBox() {
+  
   const box = `<div class = "cat_text_info">
   <h2 id="breed_name"></h2>
 <a id="wiki_info" target="_blank"></a>
@@ -68,31 +69,30 @@ function creatingBox() {
 <img id="breed_image" width = "340"  ></img>
 </div>`;
   catInfoBox.insertAdjacentHTML('afterbegin', box);
-  
 }
 
 function showBreedImage(index) {
+  // console.log(data);
+  document.getElementById('breed_name').textContent = storedBreeds[index].name;
   
-  document.getElementById('breed_name').textContent = data[index].name;
 
-  document.getElementById('breed_image').src = data[index].image.url;
+  document.getElementById('breed_image').src = storedBreeds[index].image.url;
 
   document.getElementById('breed_json').textContent =
-    data[index].temperament;
+    storedBreeds[index].temperament;
 
 
   document.getElementById('wiki_info').innerHTML =
-    data[index].description;
+    storedBreeds[index].description;
+  
+  
 }
 
 selectBreed.addEventListener('click', fetchCatByBreed);
 
-function fetchCatByBreed(event) {
+function fetchCatByBreed() {
   // console.log(event.currentTarget.value);
    const breedId = event.currentTarget.value;
   showBreedImage(breedId);
 }
-// b
-// console.log(breedId);
-// function
 
