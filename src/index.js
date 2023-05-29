@@ -64,7 +64,7 @@ function fetchBreeds() {
         creatingBox();
         showBreedImage(0);
         
-      }, 1000);
+      }, 500);
       loaderHide();
     })
   
@@ -94,39 +94,38 @@ function creatingBox() {
 }
 
 function showBreedImage(index) {
-  // console.log(data);
-  document.getElementById('breed_name').textContent = storedBreeds[index].name;
+  loaderShow();
+catInfoBox.classList.add('hide');
   
+  setTimeout(() =>
+  {
+    // console.log(data);
+    document.getElementById('breed_name').textContent =
+      storedBreeds[index].name;
 
-  document.getElementById('breed_image').src = storedBreeds[index].image.url;
+    document.getElementById('breed_image').src = storedBreeds[index].image.url;
 
-  document.getElementById('breed_json').textContent =
-    storedBreeds[index].temperament;
+    document.getElementById('breed_json').textContent =
+      storedBreeds[index].temperament;
 
-
-  document.getElementById('wiki_info').innerHTML =
-    storedBreeds[index].description;
-  
+    document.getElementById('wiki_info').innerHTML =
+      storedBreeds[index].description;
+    loaderHide();
+    catInfoBox.classList.remove('hide');
+  }, 500)
   
 }
 
 selectBreed.addEventListener('change', fetchCatByBreed);
 
 
-
 function fetchCatByBreed() {
  
    const breedId = event.currentTarget.value;
   showBreedImage(breedId);
-
+  console.log(breedId);
 }
 
-function qqq() {
-  console.log("hi");
-}
-
-
-selectBreed.addEventListener('fetch', qqq);
 
 function loaderHide() {
   if (!pLoader.classList.contains("hide")) {
