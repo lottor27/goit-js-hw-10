@@ -40,7 +40,7 @@ function fetchBreeds() {
       }
     })
     .then(data => {
-      //filter to only include those with an `image` object
+     
       data = data.filter(img => img.image?.url != null);
 
       storedBreeds = data;
@@ -50,10 +50,10 @@ function fetchBreeds() {
         let option = document.createElement('option');
         
 
-        //skip any breeds that don't have an image
+       
         if (!breed.image) continue;
 
-        //use the current array index
+      
         option.value = i;
         option.innerHTML = `${breed.name}`;
         selectBreed.appendChild(option);
@@ -71,7 +71,7 @@ function fetchBreeds() {
     .catch(function (error) {
   pError.classList.remove('hide');
       Notiflix.Report.failure(error);
-      loaderHide();
+      // loaderHide();
 });
 }
 
