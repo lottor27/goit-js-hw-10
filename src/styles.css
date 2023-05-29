@@ -39,6 +39,7 @@ li{
   flex-direction: row-reverse;
   align-items: start;
   justify-content: flex-end;
+  max-width: 1200px;
 }
 .cat_text_info{
   padding-left: 20px;

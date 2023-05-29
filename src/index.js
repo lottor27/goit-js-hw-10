@@ -25,7 +25,7 @@ const api_key =
 
 function fetchBreeds() {
   
-  loaderShow();
+  Notiflix.Loading.standard(`${pLoader.textContent}`);
 
   return fetch(urlBreeds,
     {
@@ -65,12 +65,12 @@ function fetchBreeds() {
         showBreedImage(0);
         
       }, 500);
-      loaderHide();
+      Notiflix.Loading.remove(500);
     })
   
     .catch(function (error) {
   pError.classList.remove('hide');
-      console.log(error);
+      Notiflix.Report.failure(error);
       loaderHide();
 });
 }
