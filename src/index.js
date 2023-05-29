@@ -7,18 +7,16 @@ const pLoader = document.querySelector('.loader');
 const pError = document.querySelector('.error');
 const catInfoBox = document.querySelector('.cat-info');
 
-// loadingText();
 
-// pLoader.classList.add('loader');
 pError.classList.add('hide');
-loaderShow();
+pLoader.classList.add('hide');
 let storedBreeds = [];
 
 new SlimSelect({
-  select: '#single',
+  select: '#selectElement',
 });
 
-selectBreed.setAttribute("id", 'single');
+selectBreed.setAttribute('id', 'selectElement');
 
 const urlBreeds = `https://api.thecatapi.com/v1/breeds`;
 
@@ -26,7 +24,9 @@ const api_key =
   'live_GmEyPinTRF7Q7LURfrAEdeqCEigZuDD4dcT4ZAQbZLhtFQ0FHyICoGRmHHGSy1P0';
 
 function fetchBreeds() {
-pLoader.classList.add('hide');
+  
+  loaderShow();
+
   return fetch(urlBreeds,
     {
     headers: {
@@ -35,8 +35,9 @@ pLoader.classList.add('hide');
     })
     
     .then(response => {
-      return response.json();
-      
+      if (response.ok) {
+        return response.json();
+      }
     })
     .then(data => {
       //filter to only include those with an `image` object
@@ -62,19 +63,20 @@ pLoader.classList.add('hide');
       setTimeout(() => {
         creatingBox();
         showBreedImage(0);
+        
       }, 1000);
-      
+      loaderHide();
     })
-
+  
     .catch(function (error) {
-      pError.classList.remove('hide');
+  pError.classList.remove('hide');
       console.log(error);
-      
-    });
+      loaderHide();
+});
 }
 
 
-console.log(fetchBreeds());
+fetchBreeds();
 function creatingBox() {
   
   const box = `<div class = "cat_text_info">
@@ -90,7 +92,7 @@ function creatingBox() {
   catInfoBox.insertAdjacentHTML('afterbegin', box);
   
 }
-console.log(storedBreeds);
+
 function showBreedImage(index) {
   // console.log(data);
   document.getElementById('breed_name').textContent = storedBreeds[index].name;
@@ -107,7 +109,7 @@ function showBreedImage(index) {
   
   
 }
-console.log(storedBreeds);
+
 selectBreed.addEventListener('change', fetchCatByBreed);
 
 
@@ -118,6 +120,13 @@ function fetchCatByBreed() {
   showBreedImage(breedId);
 
 }
+
+function qqq() {
+  console.log("hi");
+}
+
+
+selectBreed.addEventListener('fetch', qqq);
 
 function loaderHide() {
   if (!pLoader.classList.contains("hide")) {
@@ -130,5 +139,3 @@ function loaderShow() {
     pLoader.classList.remove('hide');
   } return
 };
-
-
