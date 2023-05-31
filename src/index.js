@@ -1,4 +1,4 @@
-import SlimSelect from 'slim-select';
+
 import Notiflix from 'notiflix';
 
 import { fetchBreeds, fetchBreedById } from './cat-api.js';
