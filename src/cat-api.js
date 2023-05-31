@@ -11,8 +11,8 @@ import {
 } from './index';
 export { fetchBreeds, fetchBreedById };
 
-const selectBreed = document.querySelector('.breedselect');
-const pLoader = document.querySelector('.loader');
+
+
 
 const api_key =
   'live_GmEyPinTRF7Q7LURfrAEdeqCEigZuDD4dcT4ZAQbZLhtFQ0FHyICoGRmHHGSy1P0';
