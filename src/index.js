@@ -60,6 +60,7 @@ function allBreedSelect(data) {
 
 
 const fetchCatByBreed = event => {
+   document.getElementById('breed_image').classList.add('hide');
   breedId = event.currentTarget.value;
   console.log(breedId);
   catInfoBox.classList.add('hide');
@@ -75,7 +76,8 @@ const fetchCatByBreed = event => {
       Notiflix.Loading.remove(500);
       loaderHide();
       catInfoBox.classList.remove('hide');
-      
+  
+      document.getElementById('breed_image').classList.remove('hide');
     })
     .catch(function (error) {
       pError.classList.remove('hide');
