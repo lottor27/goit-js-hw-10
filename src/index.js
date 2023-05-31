@@ -1,140 +1,101 @@
-//  Вместо select.breed-select можешь использовать любую библиотеку с красивыми селектом, например
 import SlimSelect from 'slim-select';
 import Notiflix from 'notiflix';
 
-const selectBreed = document.querySelector('.breedselect');
-const pLoader = document.querySelector('.loader');
-const pError = document.querySelector('.error');
-const catInfoBox = document.querySelector('.cat-info');
+import { fetchBreeds, fetchBreedById, selectBreed } from './cat-api.js';
 
 
-pError.classList.add('hide');
-pLoader.classList.add('hide');
-let storedBreeds = [];
+let storedBreed = [];
+let breedId = [];
 
-new SlimSelect({
-  select: '#selectElement',
-});
-
-selectBreed.setAttribute('id', 'selectElement');
-
-const urlBreeds = `https://api.thecatapi.com/v1/breeds`;
-
-const api_key =
-  'live_GmEyPinTRF7Q7LURfrAEdeqCEigZuDD4dcT4ZAQbZLhtFQ0FHyICoGRmHHGSy1P0';
-
-function fetchBreeds() {
-  
-  Notiflix.Loading.standard(`${pLoader.textContent}`);
-
-  return fetch(urlBreeds,
-    {
-    headers: {
-      'x-api-key': api_key,
-    },
-    })
-    
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-    })
-    .then(data => {
-     
-      data = data.filter(img => img.image?.url != null);
-
-      storedBreeds = data;
-
-      for (let i = 0; i < storedBreeds.length; i++) {
-        const breed = storedBreeds[i];
-        let option = document.createElement('option');
-        
-
-       
-        if (!breed.image) continue;
-
-      
-        option.value = i;
-        option.innerHTML = `${breed.name}`;
-        selectBreed.appendChild(option);
-        
-      }
-      
-      setTimeout(() => {
-        creatingBox();
-        showBreedImage(0);
-        
-      }, 500);
-      Notiflix.Loading.remove(500);
-    })
-  
-    .catch(function (error) {
-  pError.classList.remove('hide');
-      Notiflix.Report.failure(error);
-      // loaderHide();
-});
-}
-
-
-fetchBreeds();
-function creatingBox() {
-  
-  const box = `<div class = "cat_text_info">
-  <h2 id="breed_name"></h2>
-<a id="wiki_info" target="_blank"></a>
-<ul class="temp_list">Temperament
-<li id="breed_json"></li></ul>
-</div>
-
-<div>
-<img id="breed_image" width = "340"  ></img>
-</div>`;
-  catInfoBox.insertAdjacentHTML('afterbegin', box);
-  
-}
-
-function showBreedImage(index) {
-  loaderShow();
-catInfoBox.classList.add('hide');
-  
-  setTimeout(() =>
-  {
-    // console.log(data);
-    document.getElementById('breed_name').textContent =
-      storedBreeds[index].name;
-
-    document.getElementById('breed_image').src = storedBreeds[index].image.url;
-
-    document.getElementById('breed_json').textContent =
-      storedBreeds[index].temperament;
-
-    document.getElementById('wiki_info').innerHTML =
-      storedBreeds[index].description;
+fetchBreeds()
+  .then(response => {
+    if (response) {
+      return response.json();
+    }
+  })
+  .catch(function (error) {
+    pError.classList.remove('hide');
+    Notiflix.Report.failure(error);
     loaderHide();
-    catInfoBox.classList.remove('hide');
-  }, 500)
+  });
+
+
+
+// fetchBreedById()
+//   .then(response => {
+//     if (response) {
+//       return response.json();
+//     }
+//   })
+//   .then(data => {})
+//   .catch(function (error) {
+//     pError.classList.remove('hide');
+//     Notiflix.Report.failure(error);
+//   });
   
-}
-
-selectBreed.addEventListener('change', fetchCatByBreed);
 
 
-function fetchCatByBreed() {
- 
-   const breedId = event.currentTarget.value;
-  showBreedImage(breedId);
-  console.log(breedId);
-}
 
 
-function loaderHide() {
-  if (!pLoader.classList.contains("hide")) {
-    pLoader.classList.add('hide');
-  } return
-};
 
-function loaderShow() {
-  if (pLoader.classList.contains('hide')) {
-    pLoader.classList.remove('hide');
-  } return
-};
+
+
+
+
+
+
+
+
+
+// const select = document.querySelector('.breed-select');
+// const cotInfo = document.querySelector('.cat-info');
+
+// select.addEventListener('change', functionSelect);
+
+// fetchBreeds()
+//   .then(data => {
+//     const markup = createMarkup(data);
+//     select.innerHTML = markup;
+//   })
+//   .catch(err => {
+//     console.error(err);
+//   });
+
+// function functionSelect() {
+//   const selectedOptionValue = select.value;
+//   if (selectedOptionValue) {
+//     fetchBreeds(select.value);
+//   }
+// }
+
+// function createMarkup(arr) {
+//   return arr
+//     .map(
+//       breed => `<option value="${breed.id}">${breed.name}</option>
+//     `
+//     )
+//     .join('');
+// }
+
+// function createMarkupInfo(arr) {
+//   console.log(arr);
+//   return arr
+//     .map(
+//       breed => `<ul>
+//       <img src="${breed.url}" alt="${breed.name}">
+//       <li>${breed.id}</li>
+//       <li>${breed.description}</li>
+//       <li>${breed.temperament}</li>
+//     </ul>`
+//     )
+//     .join('');
+// }
+
+// fetchCatByBreed()
+//   .then(data => {
+//     const markupInfo = createMarkupInfo(data);
+//     console.log(data);
+//   })
+//   .catch(err => {
+//     console.error(err);
+//   });
