@@ -21,6 +21,7 @@ let breedId = [];
 let storedBreed = [];
 
 
+Notiflix.Loading.standard(`${pLoader.textContent}`);
 fetchBreeds()
   .then(response => {
     if (response.ok) {
@@ -61,7 +62,9 @@ function allBreedSelect(data) {
 const fetchCatByBreed = event => {
   breedId = event.currentTarget.value;
   console.log(breedId);
-  fetchBreedById()
+  catInfoBox.classList.add('hide');
+  loaderShow();
+  fetchBreedById(breedId)
     .then(response => {
       if (response.ok) {
         return response.json();
@@ -72,6 +75,7 @@ const fetchCatByBreed = event => {
       Notiflix.Loading.remove(500);
       loaderHide();
       catInfoBox.classList.remove('hide');
+      
     })
     .catch(function (error) {
       pError.classList.remove('hide');
@@ -85,6 +89,8 @@ selectBreed.addEventListener('change', fetchCatByBreed);
 
 function getCatInfo(data) {
   const breedinfo = data[0].breeds[0];
+  document.getElementById('breed_image').src = data[0].url;
+  document.getElementById('breed_image').alt = breedinfo.id;
   document.querySelector('.cat-name').textContent = breedinfo.name;
   document.querySelector(
     '.cat-description'
@@ -93,8 +99,6 @@ function getCatInfo(data) {
     '.cat-temperament'
   ).textContent = `Temperament: ${breedinfo.temperament}`;
 
-  document.getElementById('breed_image').src = data[0].url;
-  document.getElementById('breed_image').alt = breedinfo.id;
   console.log(breedinfo.id);
 }
 

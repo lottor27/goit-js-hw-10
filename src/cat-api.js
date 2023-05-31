@@ -18,8 +18,6 @@ const api_key =
   'live_GmEyPinTRF7Q7LURfrAEdeqCEigZuDD4dcT4ZAQbZLhtFQ0FHyICoGRmHHGSy1P0';
 
 function fetchBreeds() {
-  Notiflix.Loading.standard(`${pLoader.textContent}`);
-
   const urlBreeds = `https://api.thecatapi.com/v1/breeds`;
   return fetch(urlBreeds, {
     headers: {
@@ -27,11 +25,9 @@ function fetchBreeds() {
     },
   });
 }
-// console.log(breedId);
 
-function fetchBreedById() {
-  catInfoBox.classList.add('hide');
-  loaderShow();
+
+function fetchBreedById(breedId) {
   const urlSearchBreeds = `https://api.thecatapi.com/v1/images/search?api_key=${api_key}&breed_ids=${breedId}`;
 
   return fetch(urlSearchBreeds, {
