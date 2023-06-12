@@ -36,3 +36,54 @@ function fetchBreedById(breedId) {
     },
   });
 }
+
+
+
+
+
+
+
+
+
+async function fetchData(END_POINT, options) {
+  const response = await fetch(`${BASE_URL}${END_POINT}`, options);
+  const data = await response.json();
+  return data.results.slice(0, 3);
+}
+
+async function fetchGenres(options) {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/genre/movie/list?language=en`,
+    options
+  );
+  const data = await response.json();
+  return data.genres;
+}
+
+
+function onPageLoad() {
+  fetchData(END_POINT, options).then(movieData => {
+    renderMarkup(movieData).then(markup => {
+      addMarkup(weeklyUlRef, markup);
+    });
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
